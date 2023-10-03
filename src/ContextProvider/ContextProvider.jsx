@@ -1,4 +1,5 @@
 import { createContext } from "react"
+import PropTypes from 'prop-types';
 
 export const GlobalContext = createContext()
 
@@ -11,6 +12,10 @@ const ContextProvider = ({ children }) => {
             {children}
         </GlobalContext.Provider>
     )
+}
+
+ContextProvider.propTypes = {
+    children: PropTypes.node,
 }
 
 export default ContextProvider
