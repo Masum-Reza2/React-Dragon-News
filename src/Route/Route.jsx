@@ -8,6 +8,7 @@ import ForgetPass from "../Pages/ForgetPassword/ForgetPass"
 import About from "../Pages/About/About"
 import Career from "../Pages/Career/Career"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
+import AntiPrivateRout from "../PrivateRoute/AntiPrivateRout"
 
 const Route = createBrowserRouter([
     {
@@ -21,8 +22,8 @@ const Route = createBrowserRouter([
             { path: '/career', element: <PrivateRoute><Career /></PrivateRoute> },
 
             // open routes
-            { path: '/login', element: <Login /> },
-            { path: '/register', element: <Register /> },
+            { path: '/login', element: <AntiPrivateRout><Login /></AntiPrivateRout> },
+            { path: '/register', element: <AntiPrivateRout><Register /></AntiPrivateRout> },
             { path: '/forgetPassword', element: <ForgetPass /> },
         ]
     }
