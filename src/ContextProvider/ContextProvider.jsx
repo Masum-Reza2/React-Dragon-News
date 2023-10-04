@@ -9,14 +9,17 @@ export const GlobalContext = createContext()
 
 const ContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     // creating user
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     // update profile method
     const profileUpdate = (name, photo) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo,
         })
@@ -27,11 +30,13 @@ const ContextProvider = ({ children }) => {
 
     // logInUser
     const loginUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     // log out user
     const logOut = () => {
+        setLoading(true)
         return signOut(auth);
     }
 
@@ -40,6 +45,7 @@ const ContextProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('current User is', currentUser);
             setUser(currentUser)
+            setLoading(false)
         });
         return () => {
             unSubscribe();
@@ -55,6 +61,7 @@ const ContextProvider = ({ children }) => {
         profileUpdate,
         loginUser,
         logOut,
+        loading
     }
 
     return (

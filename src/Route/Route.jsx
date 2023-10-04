@@ -5,6 +5,9 @@ import Home from "../Pages/Home/Home"
 import Login from "../Pages/Login/Login"
 import Register from "../Pages/Register/Register"
 import ForgetPass from "../Pages/ForgetPassword/ForgetPass"
+import About from "../Pages/About/About"
+import Career from "../Pages/Career/Career"
+import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
 const Route = createBrowserRouter([
     {
@@ -12,10 +15,15 @@ const Route = createBrowserRouter([
         element: <MainLayOut />,
         errorElement: <ErrorPage />,
         children: [
-            { path: '/', element: <Home /> },
+            // private routes
+            { path: '/', element: <PrivateRoute><Home /></PrivateRoute> },
+            { path: '/about', element: <PrivateRoute><About /></PrivateRoute> },
+            { path: '/career', element: <PrivateRoute><Career /></PrivateRoute> },
+
+            // open routes
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> },
-            { path: '/forgetPassword', element: <ForgetPass /> }
+            { path: '/forgetPassword', element: <ForgetPass /> },
         ]
     }
 ])
