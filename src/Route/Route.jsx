@@ -8,7 +8,7 @@ import ForgetPass from "../Pages/ForgetPassword/ForgetPass"
 import About from "../Pages/About/About"
 import Career from "../Pages/Career/Career"
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
-import AntiPrivateRout from "../PrivateRoute/AntiPrivateRout"
+import NewsDetails from "../components/NewsDetails"
 
 const Route = createBrowserRouter([
     {
@@ -17,13 +17,14 @@ const Route = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             // private routes
-            { path: '/', element: <PrivateRoute><Home /></PrivateRoute> },
+            { path: '/', loader: () => fetch('/news.json'), element: <PrivateRoute><Home /></PrivateRoute> },
             { path: '/about', element: <PrivateRoute><About /></PrivateRoute> },
             { path: '/career', element: <PrivateRoute><Career /></PrivateRoute> },
+            { path: '/news/:id', element: <PrivateRoute><NewsDetails /></PrivateRoute> },
 
             // open routes
-            { path: '/login', element: <AntiPrivateRout><Login /></AntiPrivateRout> },
-            { path: '/register', element: <AntiPrivateRout><Register /></AntiPrivateRout> },
+            { path: '/login', element: <Login /> },
+            { path: '/register', element: <Register /> },
             { path: '/forgetPassword', element: <ForgetPass /> },
         ]
     }

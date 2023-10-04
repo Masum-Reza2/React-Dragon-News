@@ -44,7 +44,7 @@ const Register = () => {
 
 
                 // navigating to login page
-                navigate('/login')
+                return navigate('/login')
             })
             .catch(error => {
                 console.log(error.message)

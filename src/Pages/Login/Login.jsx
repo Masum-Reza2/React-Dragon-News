@@ -1,9 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Shared/Navbar"
 import useGlobal from "../../Hooks/useGlobal";
 
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation()
+    console.log(location)
     const { loginUser } = useGlobal();
 
     const handleLogin = e => {
@@ -24,7 +26,7 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 console.log('Successfully logged in')
-                navigate('/')
+                navigate(location?.state || '/')
             })
             .catch(error => {
                 console.log(error.message)

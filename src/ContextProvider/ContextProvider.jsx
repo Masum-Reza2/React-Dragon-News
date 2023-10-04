@@ -50,7 +50,7 @@ const ContextProvider = ({ children }) => {
         return () => {
             unSubscribe();
         }
-    }, [])
+    }, [user])
 
 
 
