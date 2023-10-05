@@ -20,7 +20,7 @@ const Route = createBrowserRouter([
             { path: '/', loader: () => fetch('/news.json'), element: <PrivateRoute><Home /></PrivateRoute> },
             { path: '/about', element: <PrivateRoute><About /></PrivateRoute> },
             { path: '/career', element: <PrivateRoute><Career /></PrivateRoute> },
-            { path: '/news/:id', element: <PrivateRoute><NewsDetails /></PrivateRoute> },
+            { path: '/news/:id', loader: () => fetch('/news.json'), element: <PrivateRoute><NewsDetails /></PrivateRoute> },
 
             // open routes
             { path: '/login', element: <Login /> },
