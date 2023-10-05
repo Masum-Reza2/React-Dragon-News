@@ -26,18 +26,18 @@ const Home = () => {
                 <Navbar />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mt-2">
-                <div>
+                <div className="overflow-auto scroll-smooth h-[60vh]">
                     <LeftSideNav setDisplayNews={setDisplayNews} allNews={allNews} />
                 </div>
 
                 {/* News container */}
-                <div className="md:col-span-2  space-y-14">
+                <div className="md:col-span-2 overflow-auto h-screen scroll-smooth space-y-14">
                     {
                         displayNews.map(news => <News key={news._id} news={news} />)
                     }
                 </div>
 
-                <div>
+                <div className="overflow-auto h-screen scroll-smooth">
                     <RightSideNav />
                 </div>
             </div>

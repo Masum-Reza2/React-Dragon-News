@@ -50,7 +50,7 @@ const ContextProvider = ({ children }) => {
     // user observer so much important, it holds the user even-if page reloads
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log('current User is', currentUser);
+            // console.log('current User is', currentUser);
             setUser(currentUser)
             setLoading(false)
         });
