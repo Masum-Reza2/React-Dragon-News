@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import auth from "../Firebase/firebase";
 import { updateProfile } from "firebase/auth"
 
@@ -26,7 +26,9 @@ const ContextProvider = ({ children }) => {
     }
 
     // verificationLinkSender
-
+    const sendVerificationLink = () => {
+        return sendEmailVerification(auth.currentUser)
+    }
 
     // logInUser
     const loginUser = (email, password) => {
@@ -38,6 +40,11 @@ const ContextProvider = ({ children }) => {
     const logOut = () => {
         setLoading(true)
         return signOut(auth);
+    }
+
+    // reset password
+    const resetUserPassword = (email) => {
+        return sendPasswordResetEmail(auth, email)
     }
 
     // user observer so much important, it holds the user even-if page reloads
@@ -52,16 +59,16 @@ const ContextProvider = ({ children }) => {
         }
     }, [user])
 
-
-
     // sharing global info's
     const globalInfo = {
         user,
         createUser,
         profileUpdate,
+        sendVerificationLink,
         loginUser,
         logOut,
-        loading
+        resetUserPassword,
+        loading,
     }
 
     return (

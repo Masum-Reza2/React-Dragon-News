@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../Shared/Navbar";
+import useGlobal from "../../Hooks/useGlobal";
+import swal from "sweetalert";
 
 const ForgetPass = () => {
+    const { resetUserPassword } = useGlobal()
 
     const handleForget = e => {
         e.preventDefault();
         const email = e.target.email.value;
         console.log(email)
+
+        resetUserPassword(email)
+            .then(() => {
+                swal('Done', `${email} 'Check inbox'`, 'success')
+            })
+            .catch((error) => {
+                swal('Oops', error.message, 'error')
+            })
 
         // Another way to get formData
         // console.log(e.currentTarget)
@@ -34,7 +45,7 @@ const ForgetPass = () => {
                         </div>
                     </form>
                 </div>
-                    <p className="mt-5">Remembered password? please <Link className="btn btn-sm text-blue-500" to={'/login'}>login</Link></p>
+                <p className="mt-5">Remembered password? please <Link className="btn btn-sm text-blue-500" to={'/login'}>login</Link></p>
             </div>
         </div>
     )

@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "../../Shared/Navbar"
 import useGlobal from "../../Hooks/useGlobal"
+import swal from 'sweetalert';
 
 const Register = () => {
-    const { createUser, profileUpdate } = useGlobal()
+    const { createUser, profileUpdate, sendVerificationLink } = useGlobal()
     const navigate = useNavigate();
 
     const handleRegister = e => {
@@ -29,25 +30,32 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log('created user', user);
-
+                setTimeout(() => {
+                    swal('Hey', 'Account created succesfully', 'success')
+                }, 1000);
                 // updating profile
                 profileUpdate(name, photo)
                     .then(() => {
-                        console.log('profile updated')
+                        setTimeout(() => {
+                            swal(`Welcome ${user.displayName || 'Mr. x'}!`);
+                        }, 3000);
                     })
-                    .catch(() => {
-                        console.log('profile update get some error')
+                    .catch((error) => {
+                        swal('Oops', error.message, 'error')
                     })
 
-                // sending verification code
-
-
-                // navigating to login page
-                return navigate('/login')
+                // sending verification link
+                sendVerificationLink()
+                    .then(() => {
+                        setTimeout(() => {
+                            swal('Done', `verification link sent to ${user?.email || 'your email address'}`, 'success')
+                        }, 5000);
+                        // navigating to login page
+                        return navigate('/login')
+                    })
             })
             .catch(error => {
-                console.log(error.message)
+                swal('Oops', error.message, 'error')
             })
     }
 

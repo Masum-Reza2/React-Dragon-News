@@ -1,11 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../../Shared/Navbar"
+import Navbar from "../../Shared/Navbar";
 import useGlobal from "../../Hooks/useGlobal";
+import swal from 'sweetalert';
+
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
     const { loginUser } = useGlobal();
 
     const handleLogin = e => {
@@ -25,12 +27,17 @@ const Login = () => {
         loginUser(email, password)
             .then(result => {
                 console.log(result.user)
-                console.log('Successfully logged in')
-                navigate(location?.state || '/')
+                if (result?.user?.emailVerified) {
+                    swal('Hurray', 'Successfully logged in', 'success')
+                    return navigate(location?.state || '/')
+                }
+                else {
+                    return swal('Oops', "Please verify your email!", 'error');
+                }
+
             })
             .catch(error => {
-                console.log(error.message)
-                console.log('Got some error')
+                return swal('Oops', error.message, 'error')
             })
     }
 

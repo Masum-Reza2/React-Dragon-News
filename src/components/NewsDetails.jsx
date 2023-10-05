@@ -12,6 +12,7 @@ const NewsDetails = () => {
             <div className="grid md:grid-cols-4">
                 <div className="col-span-3">
                     details here {id}
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quo deleniti id consequatur! Assumenda voluptas quia veritatis eligendi, veniam placeat.
                 </div>
                 <div>
                     <RightSideNav />

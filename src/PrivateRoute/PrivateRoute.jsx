@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
             <h1 className="text-center font-bold text-2xl">Loading...</h1>
         </div>
     }
-    return user ? children : <Navigate state={pathname} to={'/login'}></Navigate>
+    return user?.emailVerified ? children : <Navigate state={pathname} to={'/login'}></Navigate>
 }
 
 export default PrivateRoute
