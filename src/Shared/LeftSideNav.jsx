@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom"
 import './leftnav.css'
 
-const LeftSideNav = () => {
+const LeftSideNav = ({ setDisplayNews, allNews }) => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -11,6 +10,9 @@ const LeftSideNav = () => {
       .then(data => setCategories(data))
   }, [])
   // console.log(categories)
+  // const categoryNews = allNews.filter(targetNews => allNews.===categories.name)
+  // console.log(categories)
+  // console.log(allNews)
 
   return (
     <div>
@@ -20,7 +22,7 @@ const LeftSideNav = () => {
           categories.map(category => {
             let { name, id } = category;
             return <div className="text-justify pl-12 text-lg" key={id}>
-              <NavLink to={`category/${id}`}>{name}</NavLink>
+              <button className="btn focus:underline focus:bg-red-500 focus:text-white">{name}</button>
             </div>
           })
         }
